@@ -129,7 +129,7 @@ const minting = usePrepareContractWrite({
 });
 
   const { data, write } = useContractWrite(mintAddress.config)
-  const { data: mintData, write : mint } = useContractWrite(minting.config)
+  const { data: mintData, write : mint, isLoading: mintLoading, isSuccess: mintSuccess } = useContractWrite(minting.config)
   const { isLoading, isSuccess } = useWaitForTransaction({
     hash: data?.hash,
   })
@@ -139,14 +139,14 @@ const minting = usePrepareContractWrite({
     <div>
        <button disabled={!write || isLoading} onClick={() => write()} style={{ color: 'green' }}>
         {isLoading ? 'Approving...' : 'Approve'}
-      </button> <button disabled={!mint || isLoading} onClick={() => mint()} style={{ color: 'green' }}>
+      </button> <button disabled={!mint || mintLoading} onClick={() => mint()} style={{ color: 'green' }}>
         {isLoading ? 'Minting...' : 'Mint'}
       </button>
       {isSuccess && (
         <div style={{ color: 'green' }} >
-          Successfully Approved to Mint!
+          {mintSuccess ? "Successfully Minted" : "Successfully Approved to Mint!"}
           <div>
-            <a href={`https://etherscan.io/tx/${data?.hash}`}>Etherscan</a>
+            {mintSuccess ? <a href={`https://etherscan.io/tx/${mintData?.hash}`}>Etherscan</a> : <a href={`https://etherscan.io/tx/${data?.hash}`}>Etherscan</a>}
           </div>
         </div>
       )}
