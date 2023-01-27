@@ -125,7 +125,7 @@ const minting = usePrepareContractWrite({
     },
   ],
   functionName: "mintNFT",
-  args: [1, "0x4Fabb145d64652a948d72533023f6E7A623C7C53"],
+  args: [mintAmount, toPayWith],
 });
 
   const { data, write } = useContractWrite(mintAddress.config)
