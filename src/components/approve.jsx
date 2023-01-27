@@ -1,6 +1,7 @@
 import * as React from 'react'
 import UserContext from '../components/User/User';
 import { useReducer, useContext } from 'react';
+import MintAmount from './MintAmount/MintAmount';
 import {
   usePrepareContractWrite,
   useContractWrite,
@@ -9,6 +10,7 @@ import {
 var mintAddress = "RAAH"
 var toPayWith = ""
 export function ApproveToken() {
+  const { mintAmount, setMintAmount } = useContext(MintAmount);
     const {
         currentUser,
         setCurrentUser
@@ -108,7 +110,26 @@ let mintArray = ["0x6B175474E89094C44Da98b954EedeAC495271d0F","0xA0b86991c6218b3
 
 }
 
+const minting = usePrepareContractWrite({
+  address: "0x173235D2AB26ac72dD7255cf50e10b0CEA7Df374",
+  abi: [
+    {
+      name: "mintNFT",
+      type: "function",
+      stateMutability: "nonpayable",
+      inputs: [
+        { internalType: "uint", name: "numberOfTokens", type: "uint" },
+        { internalType: "address", name: "toPayWith", type: "address" },
+      ],
+      outputs: [],
+    },
+  ],
+  functionName: "mintNFT",
+  args: [1, "0x4Fabb145d64652a948d72533023f6E7A623C7C53"],
+});
+
   const { data, write } = useContractWrite(mintAddress.config)
+  const { data: mintData, write : mint } = useContractWrite(minting.config)
   const { isLoading, isSuccess } = useWaitForTransaction({
     hash: data?.hash,
   })
@@ -116,8 +137,10 @@ let mintArray = ["0x6B175474E89094C44Da98b954EedeAC495271d0F","0xA0b86991c6218b3
  
   return (
     <div>
-      <button disabled={!write || isLoading} onClick={() => write()} style={{ color: 'green' }}>
+       <button disabled={!write || isLoading} onClick={() => write()} style={{ color: 'green' }}>
         {isLoading ? 'Approving...' : 'Approve'}
+      </button> <button disabled={!mint || isLoading} onClick={() => mint()} style={{ color: 'green' }}>
+        {isLoading ? 'Minting...' : 'Mint'}
       </button>
       {isSuccess && (
         <div style={{ color: 'green' }} >

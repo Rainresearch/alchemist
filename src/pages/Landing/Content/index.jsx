@@ -135,7 +135,7 @@ const Preview = ({ onConnect }) => {
         </div>
       )}
       {isConnected ? (
-        <MintNFT />
+              <ApproveToken />
       ) : (
         <PrimaryButton
           text="CONNECT"
@@ -144,7 +144,6 @@ const Preview = ({ onConnect }) => {
           onClick={onConnect}
         />
       )}
-      <ApproveToken />
     </div>
   );
 };
