@@ -94,17 +94,13 @@ const Preview = ({ onConnect }) => {
       />
       {isConnected && (
         <div className="mt-3 text-white">
-          <div className="d-flex align-items-center justify-content-between">
-            <div>YOUR NFTS</div>
-            <div className="fw-bold">{nftCount} NFTS</div>
-          </div>
           <div className="mt-1 d-flex align-items-center justify-content-between">
             <div>PRICE</div>
-            <div className="fw-bold">{`${250 * quantity} USD`}</div>
+            <div className="fw-bold">{`${300 * quantity} USD`}</div>
           </div>
           <div className="mt-1 d-flex align-items-center justify-content-between">
-            <div>Total Supply:</div>
-            <div className="fw-bold">1003</div>
+            <div>Total Supply Remaining For WL:</div>
+            <div className="fw-bold">600</div>
           </div>
           <div className="mt-1 d-flex align-items-center justify-content-between">
             <div>{"QUANTITY"}</div>
