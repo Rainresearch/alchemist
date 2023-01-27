@@ -122,11 +122,11 @@ let mintArray = ["0x6B175474E89094C44Da98b954EedeAC495271d0F","0xA0b86991c6218b3
  
   return (
     <div>
-      <button disabled={!write || isLoading} onClick={() => write()}style={{ color: 'yellow' }}>>
+       <button disabled={isLoading} onClick={() => write()} style={{ color: 'green' }}>
         {isLoading ? 'Minting...' : 'Mint'}
-      </button>
+       </button>
       {isSuccess && (
-        <div>
+        <div style={{ color: 'green' }}>
           Successfully minted your NFT!
           <div>
             <a href={`https://etherscan.io/tx/${data?.hash}`}>Etherscan</a>
