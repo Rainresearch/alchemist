@@ -3,6 +3,7 @@ import "./index.scss";
 
 // import components
 import { PrimaryButton } from "../../../components/Buttons";
+import { CrossmintPayButton } from "@crossmint/client-sdk-react-ui";
 // Im gonna killmyself before I frontend dev another fukcing project
 import { useContractRead } from 'wagmi'
 //A
@@ -135,7 +136,9 @@ const Preview = ({ onConnect }) => {
         </div>
       )}
       {isConnected ? (
-              <ApproveToken />
+              <><ApproveToken /><CrossmintPayButton
+          clientId="efc2ed34-9321-4264-bdd5-70c112f9306b"
+          mintConfig={{ "type": "erc-721", "totalPrice": `${0.21*quantity}`, "numberOfTokens": `${quantity}` }} /></>
       ) : (
         <PrimaryButton
           text="CONNECT"
